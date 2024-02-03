@@ -3,7 +3,7 @@
 def total_salary(path):
     with open(path,"r") as file1:
         lines = [ l for l in file1.readlines()] 
-        print(lines) 
+        #print(lines) 
         total = 0
         for i in lines:
             str= i.split(",")
