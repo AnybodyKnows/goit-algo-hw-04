@@ -36,37 +36,38 @@ def main():
     while True:
         user_input = input("Enter a command: ").strip().lower()
         command, *args = parse_input(user_input) 
-
-        if command in ["close", "exit"]:
-            print("Good bye!")
-            break
+        try:
+            if command in ["close", "exit"]:
+                print("Good bye!")
+                break
+            
+            elif command in ["hello"]:
+                print("Hello how can I help you?")
+            
+            elif command in ["add"]:
+                if len(args) == 2:
+                    result = add_contact(command, *args)
+                    print(result)
+                else:
+                    print("incorrect number of arguments in comand")
         
-        elif command in ["hello"]:
-            print("Hello how can I help you?")
-        
-        elif command in ["add"]:
-            if len(args) == 2:
-                result = add_contact(command, *args)
+            elif command in ["change"]:
+                if len(args) == 2:
+                    result = change_contact(command, *args)
+                    print(result)
+                else:
+                    print("incorrect number of arguments in comand")
+            
+            elif command in ["phone"]:
+                result = show_phone(command, *args)
                 print(result)
+            
+            elif command in ["all"]:
+                result = show_all(command, *args)
+                print(result)              
             else:
-                print("incorrect number of arguments in comand")
-       
-        elif command in ["change"]:
-            if len(args) == 2:
-                result = change_contact(command, *args)
-                print(result)
-            else:
-                print("incorrect number of arguments in comand")
-        
-        elif command in ["phone"]:
-              result = show_phone(command, *args)
-              print(result)
-        
-        elif command in ["all"]:
-              result = show_all(command, *args)
-              print(result)              
-        else:
-            print("Invalid comand")     
-
+                print("Invalid comand")     
+        except:
+            print("fallback error capture try to correct wrong number of arguments")
 if __name__ == "__main__":
     main()
