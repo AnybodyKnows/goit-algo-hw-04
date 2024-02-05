@@ -1,6 +1,6 @@
 
 
-contucts_book = []
+contucts_book = {}
 
 def parse_input(user_input):
     cmd, *args = user_input.split()
@@ -8,17 +8,27 @@ def parse_input(user_input):
     return cmd, *args  
 
 def add_contact(command, *args):
-    contucts_book.append({"Name": args[0],"Phone": args[1]}) 
+    contucts_book[args[0]] = {"Phone": args[1]} 
     return ("added")
 
 def change_contact(command, *args):
-    return ("updated")
+    if args[0] in contucts_book:
+         contucts_book[args[0]] = {"Phone": args[1]}
+         return ("Contact updated.")
+    else:
+         return f"Name {args[0]} not found in contucts"
+    
 
 def show_phone(command, *args):
-    return ("!!!tel number should be here")
+    if contucts_book[args[0]]:
+        return contucts_book[args[0]]["Phone"]
+    else:
+        return f"Phone number of {args[0]} not found in contucts"
+
+    
 
 def show_all(command, *args):
-    return ("!!!All telephones should be here")
+    return contucts_book
 
 
 def main():
@@ -30,17 +40,28 @@ def main():
         if command in ["close", "exit"]:
             print("Good bye!")
             break
+        
         elif command in ["hello"]:
             print("Hello how can I help you?")
+        
         elif command in ["add"]:
-              result = add_contact(command, *args)
-              print(result)
+            if len(args) == 2:
+                result = add_contact(command, *args)
+                print(result)
+            else:
+                print("incorrect number of arguments in comand")
+       
         elif command in ["change"]:
-              result = change_contact(command, *args)
-              print(result)
+            if len(args) == 2:
+                result = change_contact(command, *args)
+                print(result)
+            else:
+                print("incorrect number of arguments in comand")
+        
         elif command in ["phone"]:
               result = show_phone(command, *args)
               print(result)
+        
         elif command in ["all"]:
               result = show_all(command, *args)
               print(result)              
