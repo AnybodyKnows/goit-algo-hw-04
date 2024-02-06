@@ -9,7 +9,8 @@ def total_salary(path):
             str= i.split(",")
             total = total + float(str[1])
             avg = total / len(lines)
-        return(f"Total={total}  AVG = {avg}")
+        return(total, avg)
 
 print(total_salary("s.txt"))
+print(type(total_salary("s.txt")))
 
