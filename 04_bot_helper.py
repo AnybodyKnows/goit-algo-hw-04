@@ -8,12 +8,12 @@ def parse_input(user_input):
     return cmd, *args  
 
 def add_contact(command, *args):
-    contucts_book[args[0]] = {"Phone": args[1]} 
+    contucts_book[args[0]] = args[1] 
     return ("added")
 
 def change_contact(command, *args):
     if args[0] in contucts_book:
-         contucts_book[args[0]] = {"Phone": args[1]}
+         contucts_book[args[0]] = args[1]
          return ("Contact updated.")
     else:
          return f"Name {args[0]} not found in contucts"
@@ -21,7 +21,7 @@ def change_contact(command, *args):
 
 def show_phone(command, *args):
     if contucts_book[args[0]]:
-        return contucts_book[args[0]]["Phone"]
+        return contucts_book[args[0]]
     else:
         return f"Phone number of {args[0]} not found in contucts"
 
